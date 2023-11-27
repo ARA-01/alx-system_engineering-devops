@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# SSH Client Configuration
+
+Host *
+  HashKnownHosts yes
+  SendEnv LANG LC_*
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials no
+  User ubuntu
+  IdentityFile ~/.ssh/school
+  PreferredAuthentications publickey
+  PasswordAuthentication no
