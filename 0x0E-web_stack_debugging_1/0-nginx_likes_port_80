@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# this configures an Nginx server to listen on port 80
+
+# remove the default Nginx configuration file
+rm /etc/nginx/sites-enabled/default
+# Create a custom Nginx configuration file with the specified requirements
+cat <<EOF > /etc/nginx/sites-available/default
+server {
+    listen 80;
+    server_name _;
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+    }
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+}
+EOF
+# configure Nginx to listen on port 80 for all active IPV4 IPs
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+# restart nginx
+service nginx restart
