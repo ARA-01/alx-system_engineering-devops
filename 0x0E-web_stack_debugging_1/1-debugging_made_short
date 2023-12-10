@@ -3,5 +3,5 @@
 
 # symbolic link is created (-s) between the Nginx configuration file
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx restart
-pkill -o nginx
+service nginx start
+kill "$(pgrep 'nginx' | head -1)"
