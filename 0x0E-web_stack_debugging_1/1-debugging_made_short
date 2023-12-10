@@ -2,6 +2,20 @@
 # this configures a Nginx server to listen to port 80
 
 # symbolic link is created (-s) between the Nginx configuration file
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx restart
-kill "$(pgrep 'nginx' | head -1)"
+rm /etc/nginx/sites-enabled/default
+cat >/etc/nginx/sites-available/default <<EOF
+server {
+    listen 80;
+    server_name _;
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+    }
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+}
+EOF
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+systemctl restart nginx
