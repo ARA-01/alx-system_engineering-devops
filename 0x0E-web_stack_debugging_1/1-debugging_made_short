@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# this configures a Nginx server to listen to port 80
+# Configures a Nginx server to listen on port 80
 rm /etc/nginx/sites-enabled/default
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-systemctl stop nginx
+service stop nginx
