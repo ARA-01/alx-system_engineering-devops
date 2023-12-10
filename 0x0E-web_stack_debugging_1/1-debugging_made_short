@@ -2,5 +2,4 @@
 # Configures a Nginx server to listen on port 80
 rm /etc/nginx/sites-enabled/default
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx start
 pkill -o nginx
